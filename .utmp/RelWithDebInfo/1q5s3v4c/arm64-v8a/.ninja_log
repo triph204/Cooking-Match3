@@ -1,0 +1,12 @@
+# ninja log v5
+124	510	8081024884540739	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	9c74d05e9ceded35
+512	1089	8081024888458369	D:/Unity/CookingMatch3/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/1q5s3v4c/obj/arm64-v8a/libswappywrapper.so	eb665a7cda4b6e2c
+1	2393	8081024903282308	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	56396cce88beee3
+37	2410	8081024903415461	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	84bd9cedb09a5a4e
+71	2447	8081024903902089	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	cdfc7e22b00b217f
+25	2493	8081024904349451	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	9630a2fdca105529
+87	2575	8081024905112212	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	4c74385c3271a0d1
+109	2868	8081024908115044	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	aa8d267cdd9f1f52
+52	2922	8081024908698656	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d430c629f77bc486
+13	3009	8081024909555399	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	42b3c0ab69fc9d5a
+3009	3106	8081024910495267	D:/Unity/CookingMatch3/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/1q5s3v4c/obj/arm64-v8a/libgame.so	e42650ba72c4ae85

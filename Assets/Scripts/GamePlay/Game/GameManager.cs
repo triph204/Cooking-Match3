@@ -1,4 +1,5 @@
 using System.Collections;
+using Match3.Gameplay.Audio;
 using Match3.Gameplay.Board;
 using Match3.Gameplay.UI;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Match3.Gameplay.Game
         [Header("References")]
         [SerializeField] private GridManager grid;
         [SerializeField] private GameUI gameUI;
+        [SerializeField] private AudioManager audioManager;
 
         [Header("Result Animation")]
         [SerializeField] private float resultRowDelay = 0.08f;
@@ -45,6 +47,10 @@ namespace Match3.Gameplay.Game
 
             if (gameUI == null)
                 gameUI = FindFirstObjectByType<GameUI>();
+
+            if (audioManager == null)
+                audioManager =
+                    FindFirstObjectByType<AudioManager>();
         }
 
         private void Start()
@@ -63,6 +69,10 @@ namespace Match3.Gameplay.Game
             if (gameUI != null)
                 gameUI.HideResultPanels();
         }
+
+        // =====================================================
+        // SCORE
+        // =====================================================
 
         public void AddScore(int gemCount)
         {
@@ -90,6 +100,10 @@ namespace Match3.Gameplay.Game
                 WinPending = true;
         }
 
+        // =====================================================
+        // LOSE
+        // =====================================================
+
         public void LoseGame()
         {
             if (IsGameOver ||
@@ -98,6 +112,10 @@ namespace Match3.Gameplay.Game
 
             LosePending = true;
         }
+
+        // =====================================================
+        // WIN SEQUENCE
+        // =====================================================
 
         public IEnumerator PlayWinSequence()
         {
@@ -110,7 +128,16 @@ namespace Match3.Gameplay.Game
             IsWin = true;
             WinPending = false;
 
+            /*
+             * Tạm dừng gameplay.
+             * Animation dùng unscaledDeltaTime/
+             * WaitForSecondsRealtime nên vẫn chạy.
+             */
             Time.timeScale = 0f;
+
+            // ---------------------------------------------
+            // CLEAR TOÀN BỘ BOARD
+            // ---------------------------------------------
 
             if (grid != null)
             {
@@ -120,13 +147,35 @@ namespace Match3.Gameplay.Game
                         resultDisappearDuration));
             }
 
+            // ---------------------------------------------
+            // ÂM THANH WIN
+            // ---------------------------------------------
+
+            if (audioManager != null)
+            {
+                audioManager.PlaySound(
+                    audioManager.winSound);
+            }
+
+            // ---------------------------------------------
+            // UNLOCK LEVEL TIẾP THEO
+            // ---------------------------------------------
+
             UnlockNextLevel();
+
+            // ---------------------------------------------
+            // HIỆN PANEL WIN
+            // ---------------------------------------------
 
             if (gameUI != null)
                 gameUI.ShowWinPanel();
 
             Time.timeScale = 0f;
         }
+
+        // =====================================================
+        // LOSE SEQUENCE
+        // =====================================================
 
         public IEnumerator PlayLoseSequence()
         {
@@ -141,6 +190,10 @@ namespace Match3.Gameplay.Game
 
             Time.timeScale = 0f;
 
+            // ---------------------------------------------
+            // CLEAR TOÀN BỘ BOARD
+            // ---------------------------------------------
+
             if (grid != null)
             {
                 yield return StartCoroutine(
@@ -148,6 +201,20 @@ namespace Match3.Gameplay.Game
                         resultRowDelay,
                         resultDisappearDuration));
             }
+
+            // ---------------------------------------------
+            // ÂM THANH LOSE
+            // ---------------------------------------------
+
+            if (audioManager != null)
+            {
+                audioManager.PlaySound(
+                    audioManager.loseSound);
+            }
+
+            // ---------------------------------------------
+            // HIỆN PANEL LOSE
+            // ---------------------------------------------
 
             if (gameUI != null)
                 gameUI.ShowLosePanel();
@@ -236,6 +303,10 @@ namespace Match3.Gameplay.Game
             return number;
         }
 
+        // =====================================================
+        // RESET LEVEL PROGRESS
+        // =====================================================
+
         public static void ResetLevelProgress()
         {
             PlayerPrefs.DeleteKey(
@@ -246,6 +317,10 @@ namespace Match3.Gameplay.Game
             Debug.Log(
                 "Level progress reset.");
         }
+
+        // =====================================================
+        // RESTART
+        // =====================================================
 
         public void RestartGame()
         {

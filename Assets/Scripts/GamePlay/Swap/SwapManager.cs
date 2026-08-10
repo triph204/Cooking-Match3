@@ -52,9 +52,7 @@ namespace Match3.Gameplay.Swap
             if (clickedGem == null)
                 return;
 
-            // ==========================================
-            // CHƯA CÓ GEM NÀO ĐƯỢC CHỌN
-            // ==========================================
+    
 
             if (selectedGem == null)
             {
@@ -69,10 +67,7 @@ namespace Match3.Gameplay.Swap
                 return;
             }
 
-            // ==========================================
-            // CLICK LẠI GEM ĐANG CHỌN
-            // ==========================================
-
+           
             if (selectedGem == clickedGem)
             {
                 selectedGem.SetSelected(false);
@@ -84,10 +79,7 @@ namespace Match3.Gameplay.Swap
                 return;
             }
 
-            // ==========================================
-            // GEM THỨ 2
-            // ==========================================
-
+        
             GemTile secondGem =
                 clickedGem;
 
@@ -110,9 +102,6 @@ namespace Match3.Gameplay.Swap
                 return;
             }
 
-            // ==========================================
-            // KHÔNG CẠNH NHAU
-            // ==========================================
 
             if (!grid.IsNeighbour(
                     firstCell,
@@ -133,9 +122,7 @@ namespace Match3.Gameplay.Swap
                 return;
             }
 
-            // ==========================================
-            // CẠNH NHAU -> SWAP
-            // ==========================================
+      
 
             GemTile firstGem =
                 selectedGem;
@@ -149,9 +136,7 @@ namespace Match3.Gameplay.Swap
                 firstGem,
                 secondGem);
         }
-        // =====================================================
-        // TRY SWAP - GEMTILE
-        // =====================================================
+
 
         public void TrySwap(
             GemTile first,
